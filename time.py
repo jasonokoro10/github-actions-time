@@ -41,3 +41,33 @@ hourly_data["temperature_2m"] = hourly_temperature_2m
 
 hourly_dataframe = pd.DataFrame(data = hourly_data)
 print(hourly_dataframe)
+
+#-------------------
+
+# Convertim a una llista per treballar amb bucles for
+temperature_list = list(hourly_temperature_2m) # hourly_temperature_2m es un array de Numpy
+
+# Calcular màxima i mínima
+temp_max = temperature_list[0]
+temp_min = temperature_list[0]
+
+# Inicialitzem total i comptador per a la mitjana
+total = 0
+contador = 0
+
+for temperatura in temperature_list:
+    total += temperatura
+    contador += 1
+
+    if temperatura > temp_max:
+        temp_max = temperatura
+    if temperatura < temp_min:
+        temp_min = temperatura
+
+mitjana = total / contador
+
+# Mostrar resultats
+print("\n--- Resum de temperatures del dia (calcul manual) ---")
+print(f"🌡️ Temperatura màxima: {temp_max:.2f} °C")
+print(f"🌡️ Temperatura mínima: {temp_min:.2f} °C")
+print(f"🌡️ Temperatura mitjana: {mitjana:.2f} °C")
