@@ -5,11 +5,11 @@ on:
     - cron: '*/5 * * * *'  # cada 5 minuts
 
 jobs:
-  executar-script-python:
+  run-python-script:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repositori
+      - name: Checkout repositori
         uses: actions/checkout@v3
 
       - name: Configurar Python 3.12
@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Instal·lar dependències
+      - name: Instalar dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
@@ -25,10 +25,10 @@ jobs:
       - name: Executar script time.py
         run: python time.py
 
-      - name: Afegir i commitejar fitxer JSON generat
+      - name: Afegir i fer commit fitxer JSON generat
         run: |
-          git config user.name "jasonokoro10"
-          git config user.email "jasonozichukwu.okoro22@lacetania.cat"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add *.json
-          git commit -m "Afegit fitxer JSON generat automàticament el $(date +'%Y-%m-%d')" || echo "No hi ha canvis per commitejar"
-          git push https://jasonokoro10:${{ secrets.PAT_GITHUB }}@github.com/jasonokoro10/github-actions-time.git main
+          git commit -m "Afegit fitxer JSON generat automàticament el $(date +'%Y-%m-%d')" || echo "No changes to commit"
+          git push origin main
