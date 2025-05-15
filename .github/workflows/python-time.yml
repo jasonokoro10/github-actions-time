@@ -31,4 +31,4 @@ jobs:
           git config user.email "jasonozichukwu.okoro22@lacetania.cat"
           git add *.json
           git commit -m "Afegit fitxer JSON generat automàticament el $(date +'%Y-%m-%d')" || echo "No hi ha canvis per commitejar"
-          git push origin main
+          git push https://jasonokoro10:${{ secrets.PAT_GITHUB }}@github.com/jasonokoro10/github-actions-time.git main
