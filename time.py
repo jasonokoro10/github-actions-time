@@ -4,6 +4,9 @@ import pandas as pd
 import requests_cache
 from retry_requests import retry
 
+import json
+from datetime import datetime
+
 # Setup the Open-Meteo API client with cache and retry on error
 cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)
 retry_session = retry(cache_session, retries = 5, backoff_factor = 0.2)
@@ -71,3 +74,29 @@ print("\n--- Resum de temperatures del dia (calcul manual) ---")
 print(f"🌡️ Temperatura màxima: {temp_max:.2f} °C")
 print(f"🌡️ Temperatura mínima: {temp_min:.2f} °C")
 print(f"🌡️ Temperatura mitjana: {mitjana:.2f} °C")
+
+#-------------------
+
+# Crear diccionari amb les dades
+resum_temperatures = {
+    "temp_max": float(round(temp_max, 2)),
+    "temp_min": float(round(temp_min, 2)),
+    "temp_mitjana": float(round(mitjana, 2))
+}
+
+#-------------------
+
+# Obtenir la data actual en format YYYYMMDD
+data_actual = datetime.now().strftime("%Y%m%d")
+
+# Ruta completa on volem guardar el fitxer JSON
+directori = "C:\\Users\\jason\\OneDrive\\Escritorio\\1r DAW\\Asignaturas\\Entorns de Desenvolupament\\Bloc 5 Integració avançada de Git\\time"
+nom_fitxer = f"{directori}\\temp_{data_actual}.json"
+
+#-------------------
+
+# Escriure les dades al fitxer JSON amb identació
+with open(nom_fitxer, "w") as fitxer_json:
+    json.dump(resum_temperatures, fitxer_json, indent=4)
+    
+print(f"\nFitxer JSON creat: {nom_fitxer}")
