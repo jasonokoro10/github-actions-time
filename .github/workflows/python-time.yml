@@ -1,0 +1,34 @@
+name: Executar script Python diari
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # cada 5 minuts
+
+jobs:
+  executar-script-python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositori
+        uses: actions/checkout@v3
+
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Instal·lar dependències
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Executar script time.py
+        run: python time.py
+
+      - name: Afegir i commitejar fitxer JSON generat
+        run: |
+          git config user.name "jasonokoro10"
+          git config user.email "jasonozichukwu.okoro22@lacetania.cat"
+          git add *.json
+          git commit -m "Afegit fitxer JSON generat automàticament el $(date +'%Y-%m-%d')" || echo "No hi ha canvis per commitejar"
+          git push origin main
