@@ -89,9 +89,8 @@ resum_temperatures = {
 # Obtenir la data actual en format YYYYMMDD
 data_actual = datetime.now().strftime("%Y%m%d")
 
-# Ruta completa on volem guardar el fitxer JSON
-directori = "C:\\Users\\jason\\OneDrive\\Escritorio\\1r DAW\\Asignaturas\\Entorns de Desenvolupament\\Bloc 5 Integració avançada de Git\\time"
-nom_fitxer = f"{directori}\\temp_{data_actual}.json"
+# Nom del fitxer JSON
+nom_fitxer = f"temp_{data_actual}.json"
 
 #-------------------
 
