@@ -89,7 +89,7 @@ resum_temperatures = {
 # Obtenir la data actual en format YYYYMMDD
 data_actual = datetime.now().strftime("%Y%m%d")
 
-# Nom del fitxer JSON
+# Nom de l'arxiu fitxer JSON
 nom_fitxer = f"temp_{data_actual}.json"
 
 #-------------------
